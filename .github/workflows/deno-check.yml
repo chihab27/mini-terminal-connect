@@ -5,6 +5,7 @@ on:
     branches: [validate/oauth-application-reuse]
     paths:
       - 'supabase/functions/mini-terminal-connections/**'
+      - '.github/workflows/deno-check.yml'
   pull_request:
     paths:
       - 'supabase/functions/mini-terminal-connections/**'
@@ -24,3 +25,5 @@ jobs:
           deno-version: v2.x
       - name: Type-check complete backend
         run: deno check supabase/functions/mini-terminal-connections/index.ts
+      - name: Test generic OAuth templates
+        run: deno test supabase/functions/mini-terminal-connections/oauth-template.test.ts
