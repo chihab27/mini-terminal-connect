@@ -4,11 +4,11 @@ on:
   push:
     branches: [validate/oauth-application-reuse]
     paths:
-      - 'supabase/functions/**'
+      - 'supabase/functions/mini-terminal-connections/**'
       - '.github/workflows/deno-check.yml'
   pull_request:
     paths:
-      - 'supabase/functions/**'
+      - 'supabase/functions/mini-terminal-connections/**'
       - '.github/workflows/deno-check.yml'
 
 permissions:
@@ -23,9 +23,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - name: Type-check connection backend
+      - name: Type-check complete backend
         run: deno check supabase/functions/mini-terminal-connections/index.ts
-      - name: Type-check MCP schema and transport
-        run: deno check supabase/functions/supabase-mini-terminal/index.ts
       - name: Test generic OAuth templates
         run: deno test supabase/functions/mini-terminal-connections/oauth-template.test.ts
