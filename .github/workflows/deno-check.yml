@@ -1,0 +1,26 @@
+name: Deno backend type check
+
+on:
+  push:
+    branches: [validate/oauth-application-reuse]
+    paths:
+      - 'supabase/functions/mini-terminal-connections/**'
+  pull_request:
+    paths:
+      - 'supabase/functions/mini-terminal-connections/**'
+      - '.github/workflows/deno-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check complete backend
+        run: deno check supabase/functions/mini-terminal-connections/index.ts
